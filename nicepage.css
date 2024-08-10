@@ -13093,6 +13093,14 @@ section.u-image:not(.u-hover-box),
   margin-bottom: 0;
   height: 100%;
 }
+.u-layout-wrap.u-layout-spacing-horizontal .u-layout-cell {
+  border-left-width: 0;
+  border-right-width: 0;
+}
+.u-layout-wrap.u-layout-spacing-horizontal .u-layout {
+  margin-left: 0;
+  margin-right: 0;
+}
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   .u-layout-col > * {
     flex-basis: auto !important;

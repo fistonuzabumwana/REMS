@@ -1,34 +1,41 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "REMS";
+ <?php
+$servername = "localhost";  // Your MySQL server
+$username = "root";         // Your MySQL username
+$password = "";             // Your MySQL password
+$dbname = "rems";           // Your database name
 
+// Create connection to the database
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-
-
-if ($conn->connect_error){
-
-    die("unable to connect to the server". $conn->connect_error);
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $gender = $_POST['gender'];
+    $service = $_POST['service'];
+    $message = $_POST['message'];
 
-$text = $_POST["text"];
-$Number = $_POST["Number"];
-$email = $_POST["email"];
-$placeholder = $_POST["placeholder"];
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("INSERT INTO contactinfo (name, email, phone, gender, service, message) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $name, $email, $phone, $gender, $service, $message);
 
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "Thank you! Your message has been sent.";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
 
-$stmt = $conn->prepare("INSERT INTO contactinfo (fullname, phone, email, `message`) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $text, $Number, $email, $placeholder);
-
-
-if ($stmt->execute()) {
-    echo "Info submitted successfully";
-} else {
-    echo "Error occurred: " . $stmt->error;
+    // Close the statement
+    $stmt->close();
 }
-$stmt->close();
 
-    $conn->close();
+// Close the database connection
+$conn->close();

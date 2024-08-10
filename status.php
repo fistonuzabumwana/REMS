@@ -1,16 +1,41 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "rems";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Retrieve data from the database
+$sql = "SELECT * FROM contactinfo";
+$result = $conn->query($sql);
+
+// $sql2 = "SELECT * FROM newsletter";
+// $result2 = $conn->query($sql2);
+?>
+
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="en-RW"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Rwanda Agriculture Board, Our Services">
+    <meta name="keywords" content="Stakeholders Contact Information">
     <meta name="description" content="">
-    <title>Services</title>
+    <title>status</title>
     <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="Services.css" media="screen">
+<link rel="stylesheet" href="status.css" media="screen">
     <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 6.15.2, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="fonts.css">
+    
+    
+    
     
     
     
@@ -29,9 +54,9 @@
     <meta name="theme-color" content="#478ac9">
     <meta name="twitter:site" content="@">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Services">
+    <meta name="twitter:title" content="status">
     <meta name="twitter:description" content="Real Estate Management System">
-    <meta property="og:title" content="Services">
+    <meta property="og:title" content="status">
     <meta property="og:description" content="">
     <meta property="og:type" content="website">
   <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
@@ -61,7 +86,7 @@
 </li></ul>
 </div>
 </li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="Contact.html" style="padding: 8px 5px;">Contact</a>
-</li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="status.html" style="padding: 8px 5px;">Status</a>
+</li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="status.php" style="padding: 8px 5px;">Status</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
@@ -78,7 +103,7 @@
 </li></ul>
 </div>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Contact.html">Contact</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="status.php">Status</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="status.html">Status</a>
 </li></ul>
               </div>
             </div>
@@ -99,61 +124,182 @@
           <input class="u-search-input u-search-input-1" type="search" name="search" value="" placeholder="Search">
         </form>
       </div></header>
-    <section class="u-clearfix u-custom-color-9 u-section-1" id="sec-0eef">
+    <section class="u-align-center u-clearfix u-container-align-center u-custom-color-9 u-section-1" id="sec-c04a">
       <div class="u-clearfix u-sheet u-sheet-1"></div>
     </section>
-    <section class="u-align-center u-clearfix u-custom-color-9 u-section-2" id="carousel_cd8d">
+    <section class="u-align-center u-clearfix u-custom-color-9 u-section-2" id="sec-a12c">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <h2 class="u-align-center u-text u-text-custom-color-10 u-text-font u-text-1" data-animation-name="customAnimationIn" data-animation-duration="1500">Our Services</h2>
-        <div class="u-expanded-width-sm u-expanded-width-xs u-list u-list-1">
-          <div class="u-repeater u-repeater-1">
-            <div class="u-align-left u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-white u-list-item-1" data-animation-direction="Up" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
-              <div class="u-container-layout u-similar-container u-container-layout-1">
-                <div class="custom-expanded u-container-align-center-lg u-container-align-center-xl u-container-align-left-md u-container-align-left-sm u-container-style u-group u-shape-rectangle u-group-1">
-                  <div class="u-container-layout u-valign-middle-xs">
-                    <h3 class="u-align-center-lg u-align-center-xl u-align-left-md u-align-left-sm u-align-left-xs u-custom-font u-text u-text-custom-color-1 u-text-default u-text-font u-text-2">1</h3>
-                  </div>
-                </div>
-                <h4 class="u-text u-text-custom-color-10 u-text-3">Renting Houses</h4>
-                <p class="u-text u-text-4"> We provide all necessary legal documents and contracts for renting properties. Our comprehensive services ensure that all rental agreements are transparent and comply with local regulations, guaranteeing a safe and secure leasing process for both landlords and tenants.<br>
-                </p>
-              </div>
-            </div>
-            <div class="u-align-left u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-video-cover u-white u-list-item-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="1500">
-              <div class="u-container-layout u-similar-container u-container-layout-3">
-                <div class="custom-expanded u-container-align-left-md u-container-align-left-sm u-container-style u-group u-shape-rectangle u-group-2">
-                  <div class="u-container-layout u-valign-middle-xs">
-                    <h3 class="u-align-center-lg u-align-center-xl u-align-left-md u-align-left-sm u-align-left-xs u-custom-font u-text u-text-custom-color-1 u-text-default u-text-font u-text-5">2</h3>
-                  </div>
-                </div>
-                <h4 class="u-text u-text-custom-color-10 u-text-6">Selling Houses</h4>
-                <p class="u-text u-text-7"> Our platform offers end-to-end digitization of the home-selling process, streamlining everything from property listing to closing the deal. We bridge the gap between sellers and buyers, providing a seamless and efficient experience that ensures transparency and compliance with all regulations.</p>
-              </div>
-            </div>
-            <div class="u-align-left u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-video-cover u-white u-list-item-3" data-animation-direction="Up" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="2000">
-              <div class="u-container-layout u-similar-container u-container-layout-5">
-                <div class="custom-expanded u-container-align-center-lg u-container-align-center-xl u-container-align-left-md u-container-align-left-sm u-container-style u-group u-shape-rectangle u-group-3">
-                  <div class="u-container-layout u-valign-middle-xs">
-                    <h3 class="u-align-center-lg u-align-center-xl u-align-left-md u-align-left-sm u-align-left-xs u-custom-font u-text u-text-custom-color-1 u-text-default u-text-font u-text-8">3</h3>
-                  </div>
-                </div>
-                <h4 class="u-text u-text-custom-color-10 u-text-9">Leasing Houses</h4>
-                <p class="u-text u-text-10"> This service ensures compliance with all property laws and regulations to maintain high standards of safety and quality. We prioritize the well-being of both landlords and tenants, ensuring that all leased properties meet the required safety and maintenance standards.</p>
-              </div>
-            </div>
-            <div class="u-align-left u-container-style u-list-item u-radius-50 u-repeater-item u-shape-round u-video-cover u-white u-list-item-4" data-animation-direction="Up" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="2500">
-              <div class="u-container-layout u-similar-container u-container-layout-7">
-                <div class="custom-expanded u-container-align-left-md u-container-align-left-sm u-container-style u-group u-shape-rectangle u-group-4">
-                  <div class="u-container-layout u-valign-middle-xs">
-                    <h3 class="u-align-center-lg u-align-center-xl u-align-left-md u-align-left-sm u-align-left-xs u-custom-font u-text u-text-custom-color-1 u-text-default u-text-font u-text-11">4</h3>
-                  </div>
-                </div>
-                <h4 class="u-text u-text-custom-color-10 u-text-12">Selling Land</h4>
-                <p class="u-text u-text-13"> Our service includes thorough evaluations conducted by authorized professionals to ensure that all land transactions comply with legal and environmental regulations. We provide accurate assessments and documentation, guaranteeing a smooth and compliant selling process for landowners. </p>
-              </div>
-            </div>
-          </div>
+        <h1 class="u-align-center u-custom-font u-font-courier-new u-text u-text-custom-color-1 u-text-default u-text-1">Welcome Back, $sername</h1>
+      </div>
+    </section>
+    <section class="u-align-center u-clearfix u-custom-color-9 u-section-3" id="sec-698b">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-align-center u-text u-text-custom-color-10 u-text-default u-text-1">Stakeholders Contact Information</h1>
+        <div class="custom-expanded u-table u-table-responsive u-table-1">
+          <table class="u-table-entity u-table-entity-1">
+            <colgroup>
+              <col width="3.28%">
+              <col width="17.31%">
+              <col width="14.51%">
+              <col width="17.68%">
+              <col width="3.88%">
+              <col width="11.33%">
+              <col width="19.33%">
+
+            </colgroup>
+            <thead class="u-custom-color-10 u-table-header u-table-header-1">
+              <tr style="height: 42px;">
+                <th class="u-border-1 u-border-custom-color-2 u-table-cell">No </th>
+                <th class="u-border-1 u-border-custom-color-2 u-table-cell">Full name </th>
+                <th class="u-border-1 u-border-custom-color-2 u-table-cell">Email </th>
+                <th class="u-border-1 u-border-custom-color-2 u-table-cell"> Phone </th>
+                <th class="u-border-1 u-border-custom-color-2 u-table-cell">Gender </th>
+                <th class="u-border-1 u-border-custom-color-2 u-table-cell"> Service </th>
+                <th class="u-border-1 u-border-custom-color-2 u-table-cell"> Message </th>
+              </tr>
+            </thead>
+            <tbody class="u-table-body u-text-black u-table-body-1">
+            <?php
+            $index = 1;
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                  
+                    echo "<tr style='height: 7px;'>
+                            <td class='u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-19'>" . $index. "</td>
+                            <td class='u-border-1 u-border-grey-30 u-table-cell'>" . $row["name"]. "</td>
+                            <td class='u-border-1 u-border-grey-30 u-table-cell'>" . $row["email"]. "</td>
+                            <td class='u-border-1 u-border-grey-30 u-table-cell'>" . $row["phone"]. "</td>
+                            <td class='u-border-1 u-border-grey-30 u-table-cell'>" . $row["gender"]. "</td>
+                            <td class='u-border-1 u-border-grey-30 u-table-cell'>" . $row["service"]. "</td>
+                            <td class='u-border-1 u-border-grey-30 u-table-cell'>" . $row["message"]. "</td>
+                          </tr>";
+                          $index++;
+                }
+            } else {
+                echo "<tr class='u-border-1 u-border-grey-30 u-table-cell'><td colspan='7'>No records found</td></tr>";
+            }
+            ?>
+            </tbody>
+          </table>
         </div>
+      </div>
+    </section>
+    <section class="u-align-center u-clearfix u-custom-color-9 u-section-4" id="carousel_357b">
+      <h1 class="u-align-center u-text u-text-custom-color-10 u-text-default u-text-1">Selling House Client</h1>
+      <div class="custom-expanded u-table u-table-responsive u-table-1">
+        <table class="u-table-entity u-table-entity-1">
+          <colgroup>
+            <col width="16.6%">
+            <col width="16.6%">
+            <col width="12.1%">
+            <col width="21.1%">
+            <col width="16.6%">
+            <col width="17%">
+          </colgroup>
+          <thead class="u-custom-color-10 u-table-header u-table-header-1">
+            <tr style="height: 39px;">
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell">Column 1 </th>
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell">Column 2 </th>
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell">Column 3 </th>
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell">Column 4 </th>
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell"></th>
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell"></th>
+            </tr>
+          </thead>
+          <tbody class="u-table-body u-text-black u-table-body-1">
+            <tr style="height: 39px;">
+              <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-7">Row 1</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+            </tr>
+            <tr style="height: 28px;">
+              <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-13">Row 2</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+            </tr>
+            <tr style="height: 39px;">
+              <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-19">Row 3</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+            </tr>
+            <tr style="height: 26px;">
+              <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-25">Row 4</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="u-align-center u-clearfix u-custom-color-9 u-section-5" id="carousel_0328">
+      <h1 class="u-align-center u-text u-text-custom-color-10 u-text-default u-text-1">Renting House Client</h1>
+      <div class="custom-expanded u-table u-table-responsive u-table-1">
+        <table class="u-table-entity u-table-entity-1">
+          <colgroup>
+            <col width="12.1%">
+            <col width="19%">
+            <col width="18.7%">
+            <col width="16.6%">
+            <col width="16.6%">
+            <col width="17%">
+          </colgroup>
+          <thead class="u-custom-color-10 u-table-header u-table-header-1">
+            <tr style="height: 48px;">
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell">Column 1 </th>
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell">Column 2 </th>
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell">Column 3 </th>
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell">Column 4 </th>
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell"></th>
+              <th class="u-border-1 u-border-custom-color-2 u-table-cell"></th>
+            </tr>
+          </thead>
+          <tbody class="u-table-body u-text-black u-table-body-1">
+            <tr style="height: 30px;">
+              <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-7">Row 1</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+            </tr>
+            <tr style="height: 26px;">
+              <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-13">Row 2</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+            </tr>
+            <tr style="height: 31px;">
+              <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-19">Row 3</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+            </tr>
+            <tr style="height: 31px;">
+              <td class="u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-25">Row 4</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell">Description</td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+              <td class="u-border-1 u-border-grey-30 u-table-cell"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
     
