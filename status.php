@@ -1,4 +1,14 @@
 <?php
+session_start(); // Start the session
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // If not logged in, redirect to the login page
+    header("Location: signin.html");
+    exit();
+}
+?>
+<?php
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -16,8 +26,8 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM contactinfo";
 $result = $conn->query($sql);
 
-// $sql2 = "SELECT * FROM newsletter";
-// $result2 = $conn->query($sql2);
+$sql2 = "SELECT * FROM user";
+$result2 = $conn->query($sql2);
 ?>
 
 <!DOCTYPE html>
@@ -64,9 +74,24 @@ $result = $conn->query($sql);
         <a href="#" class="u-image u-image-round u-logo u-radius u-image-1" data-image-width="2000" data-image-height="2000">
           <img src="images/real-estate-management-system-high-resolution-logo-transparent.png" class="u-logo-image u-logo-image-1">
         </a>
-        <a href="signin.html" class="u-image u-image-round u-logo u-radius u-image-2" data-image-width="150" data-image-height="150" title="signin">
-          <img src="images/guest-128.png" class="u-logo-image u-logo-image-2">
-        </a>
+         <?php
+        if (isset($_SESSION['user_id'])) {
+       echo "<a href='logout.php' onclick='return confirmLogout()' class='u-image u-image-round u-logo u-radius u-image-2' data-image-width='150' data-image-height='150' title='signin'>
+          <img src='images/guest-128.png' class='u-logo-image u-logo-image-2'>
+        </a>";
+      }
+      else{
+        echo "<a href='signin.html' class='u-image u-image-round u-logo u-radius u-image-2' data-image-width='150' data-image-height='150' title='signin'>
+          <img src='images/guest-128.png' class='u-logo-image u-logo-image-2'>
+        </a>";
+      }
+      ?>
+     <script>
+function confirmLogout() {
+    var confirmMessage = "Are you sure you want to log out?";
+    return confirm(confirmMessage); // Returns true if the user clicks "OK", otherwise false
+}
+</script>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="XS">
           <div class="menu-collapse" style="font-size: 0.875rem; letter-spacing: 0px; text-transform: uppercase; font-weight: 500;">
             <a class="u-button-style u-custom-active-border-color u-custom-active-color u-custom-border u-custom-border-color u-custom-borders u-custom-color u-custom-effect-duration u-custom-hover-border-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-decoration u-custom-text-hover-color u-custom-text-shadow u-custom-text-shadow-blur u-custom-text-shadow-color u-custom-text-shadow-transparency u-custom-text-shadow-x u-custom-text-shadow-y u-custom-top-bottom-menu-spacing u-nav-link u-text-active-custom-color-1 u-text-hover-custom-color-2 u-text-white" href="#">
@@ -76,34 +101,41 @@ $result = $conn->query($sql);
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-custom-font u-heading-font u-nav u-spacing-30 u-unstyled u-nav-1" data-submenu-level="with-reload"><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="./" style="padding: 8px 5px;">Home</a>
-</li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="About.html" style="padding: 8px 5px;">About Us</a>
-</li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="Services.html" style="padding: 8px 5px;">Services</a>
-</li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="property.html" style="padding: 8px 5px;">Property</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10"><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.html">RENT HOUSE</a>
-</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.html">BUY HOUSE</a>
-</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.html">BUY LAND</a>
-</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.html">LEASES OF LAND OR HOUSE</a>
+            <ul class="u-custom-font u-heading-font u-nav u-spacing-30 u-unstyled u-nav-1" data-submenu-level="with-reload"><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="index.php" style="padding: 8px 5px;">Home</a>
+</li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="About.php" style="padding: 8px 5px;">About Us</a>
+</li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="Services.php" style="padding: 8px 5px;">Services</a>
+</li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="property.php" style="padding: 8px 5px;">Property</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10"><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.php">RENT HOUSE</a>
+</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.php">BUY HOUSE</a>
+</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.php">BUY LAND</a>
+</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.php">LEASES OF LAND OR HOUSE</a>
 </li></ul>
 </div>
-</li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="Contact.html" style="padding: 8px 5px;">Contact</a>
-</li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="status.php" style="padding: 8px 5px;">Status</a>
-</li></ul>
+</li><li class="u-nav-item"><a class="u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white" href="Contact.php" style="padding: 8px 5px;">Contact</a>
+<?php 
+if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+echo "</li><li class='u-nav-item'><a class='u-active-custom-color-2 u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-hover-custom-color-2 u-nav-link u-text-active-white u-text-hover-white u-text-white' href='status.php' style='padding: 8px 5px;'>Admin</a>";
+}
+?></li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-spacing-5 u-unstyled u-nav-3"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="./">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="About.html">About Us</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Services.html">Services</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="property.html">Property</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10"><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.html">RENT HOUSE</a>
-</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.html">BUY HOUSE</a>
-</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.html">BUY LAND</a>
-</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.html">LEASES OF LAND OR HOUSE</a>
+                <ul class="u-align-center u-nav u-popupmenu-items u-spacing-5 u-unstyled u-nav-3"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="index.php">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="About.php">About Us</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Services.php">Services</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="property.php">Property</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10"><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.php">RENT HOUSE</a>
+</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.php">BUY HOUSE</a>
+</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.php">BUY LAND</a>
+</li><li class="u-nav-item"><a class="u-button-style u-custom-color-10 u-hover-grey-10 u-nav-link u-text-hover-black u-text-white" href="property.php">LEASES OF LAND OR HOUSE</a>
 </li></ul>
 </div>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Contact.html">Contact</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="status.html">Status</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Contact.php">Contact</a>
+<?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="status.php">Admin</a>
+<?php endif; ?>
+
+
 </li></ul>
               </div>
             </div>
@@ -111,7 +143,16 @@ $result = $conn->query($sql);
           </div>
         </nav>
         <p class="u-align-center u-small-text u-text u-text-variant u-text-white u-text-1">
-          <a class="u-btn u-button-link u-button-style u-text-body-alt-color u-text-hover-grey-5 u-btn-1" data-href="signin.html" href="signin.html">Login</a>
+          <a class="u-btn u-button-link u-button-style u-text-body-alt-color u-text-hover-grey-5 u-btn-1" data-href="signin.html" href="signin.html">
+          <?php 
+if (isset($_SESSION['user_id'])) {
+  // Output the username
+  echo $_SESSION['username'];
+} else {
+  echo "Login";
+}
+?> 
+          </a>
         </p>
         <img class="u-image u-image-contain u-image-default u-image-3" src="images/logo-no-background1.png" alt="" data-image-width="1500" data-image-height="339">
         <form action="#" method="get" class="u-border-2 u-border-custom-color-1 u-radius u-search u-search-left u-white u-search-1">
@@ -129,9 +170,79 @@ $result = $conn->query($sql);
     </section>
     <section class="u-align-center u-clearfix u-custom-color-9 u-section-2" id="sec-a12c">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <h1 class="u-align-center u-custom-font u-font-courier-new u-text u-text-custom-color-1 u-text-default u-text-1">Welcome Back, $sername</h1>
-      </div>
-    </section>
+  <h1 class='u-align-center u-custom-font u-font-courier-new u-text u-text-custom-color-1 u-text-default u-text-1'>
+    <?php 
+
+if (isset($_SESSION['user_id'])) {
+      // Output the username
+      echo "Welcome Back, " . $_SESSION['username'] . "!";
+  } else {
+      echo "No username found. Please log in.";
+  }
+  ?>
+    </h1>;
+
+        </div>
+        <section class="u-align-center u-clearfix u-custom-color-9 u-section-3" id="sec-698b">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-align-center u-text u-text-custom-color-10 u-text-default u-text-1">User Management</h1>
+        <div class="custom-expanded u-table u-table-responsive u-table-1">
+            <table class="u-table-entity u-table-entity-1" id="editableTable">
+                <colgroup>
+                    <col width="3.28%">
+                    <col width="17.31%">
+                    <col width="14.51%">
+                    <col width="17.68%">
+                    <col width="3.88%">
+                    <col width="11.33%">
+                    <col width="19.33%">
+                    <col width="3.88%">
+                    <col width="11.33%">
+                    <col width="19.33%">
+                </colgroup>
+                <thead class="u-custom-color-10 u-table-header u-table-header-1">
+                    <tr style="height: 42px;">
+                        <th class="u-border-1 u-border-custom-color-2 u-table-cell">No</th>
+                        <th class="u-border-1 u-border-custom-color-2 u-table-cell">First name</th>
+                        <th class="u-border-1 u-border-custom-color-2 u-table-cell">Last name</th>
+                        <th class="u-border-1 u-border-custom-color-2 u-table-cell">Country</th>
+                        <th class="u-border-1 u-border-custom-color-2 u-table-cell">Email</th>
+                        <th class="u-border-1 u-border-custom-color-2 u-table-cell">Phone</th>
+                        <th class="u-border-1 u-border-custom-color-2 u-table-cell">Password</th>
+                        <th class="u-border-1 u-border-custom-color-2 u-table-cell">Date</th>
+                        <th class="u-border-1 u-border-custom-color-2 u-table-cell">Agree</th>
+                        <th class="u-border-1 u-border-custom-color-2 u-table-cell">Role</th>
+                    </tr>
+                </thead>
+                <tbody class="u-table-body u-text-black u-table-body-1">
+                <?php
+                $index = 1;
+                if ($result2->num_rows > 0) {
+                    while($row = $result2->fetch_assoc()) {
+                        echo "<tr data-id='" . $row["id"] . "' style='height: 7px;'>
+                                <td class='u-border-1 u-border-grey-30 u-first-column u-grey-5 u-table-cell u-table-cell-19'>" . $index. "</td>
+                                <td class='u-border-1 u-border-grey-30 u-table-cell' contenteditable='true'>" . $row["firstname"]. "</td>
+                                <td class='u-border-1 u-border-grey-30 u-table-cell' contenteditable='true'>" . $row["lastname"]. "</td>
+                                <td class='u-border-1 u-border-grey-30 u-table-cell' contenteditable='true'>" . $row["country"]. "</td>
+                                <td class='u-border-1 u-border-grey-30 u-table-cell' contenteditable='true'>" . $row["email"]. "</td>
+                                <td class='u-border-1 u-border-grey-30 u-table-cell' contenteditable='true'>" . $row["phone"]. "</td>
+                                <td class='u-border-1 u-border-grey-30 u-table-cell' contenteditable='true'>" . $row["password"]. "</td>
+                                <td class='u-border-1 u-border-grey-30 u-table-cell' contenteditable='true'>" . $row["date"]. "</td>
+                                <td class='u-border-1 u-border-grey-30 u-table-cell' contenteditable='true'>" . $row["agreed"]. "</td>
+                                <td class='u-border-1 u-border-grey-30 u-table-cell' contenteditable='true'>" . $row["role"]. "</td>
+                              </tr>";
+                              $index++;
+                    }
+                } else {
+                    echo "<tr class='u-border-1 u-border-grey-30 u-table-cell'><td colspan='10'>No records found</td></tr>";
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+        <button class="save-button"   onclick="saveTableData()">Save Changes</button>
+    </div>
+</section>
     <section class="u-align-center u-clearfix u-custom-color-9 u-section-3" id="sec-698b">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h1 class="u-align-center u-text u-text-custom-color-10 u-text-default u-text-1">Stakeholders Contact Information</h1>
@@ -184,6 +295,48 @@ $result = $conn->query($sql);
         </div>
       </div>
     </section>
+
+<script>
+function saveTableData() {
+    const table = document.getElementById('editableTable');
+    const rows = table.getElementsByTagName('tr');
+    const data = [];
+
+    for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header
+        const cells = rows[i].getElementsByTagName('td');
+        const rowData = {
+            id: rows[i].getAttribute('data-id'),
+            firstname: cells[1].innerText,
+            lastname: cells[2].innerText,
+            country: cells[3].innerText,
+            email: cells[4].innerText,
+            phone: cells[5].innerText,
+            password: cells[6].innerText,
+            date: cells[7].innerText,
+            agreed: cells[8].innerText,
+            role: cells[9].innerText
+        };
+        data.push(rowData);
+    }
+
+    // Send data to the server via AJAX
+    fetch('save_changes.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        alert('Changes saved successfully!');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+</script>
+    
     <section class="u-align-center u-clearfix u-custom-color-9 u-section-4" id="carousel_357b">
       <h1 class="u-align-center u-text u-text-custom-color-10 u-text-default u-text-1">Selling House Client</h1>
       <div class="custom-expanded u-table u-table-responsive u-table-1">
@@ -367,13 +520,5 @@ c0-7.4,3.4-18.8,18.8-18.8h13.8v15.4H75.5z"></path></svg></span>
         </div>
         <p class="u-text u-text-5">© 2024 REMS. All rights reserved.</p>
       </div></footer>
-    <section class="u-backlink u-clearfix u-grey-80">
-      <p class="u-text">
-        <span>This site was created with the </span>
-        <a class="u-link" href="https://nicepage.com/" target="_blank" rel="nofollow">
-          <span>Nicepage</span>
-        </a>
-      </p>
-    </section>
-  
+    
 </body></html>

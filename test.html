@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Table Example</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        td[contenteditable="true"] {
+            background-color: #f9f9f9;
+        }
+        .save-button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Editable Table Example</h2>
+
+<table id="editableTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td contenteditable="true">John Doe</td>
+            <td contenteditable="true">25</td>
+            <td contenteditable="true">john.doe@example.com</td>
+        </tr>
+        <tr>
+            <td contenteditable="true">Jane Smith</td>
+            <td contenteditable="true">30</td>
+            <td contenteditable="true">jane.smith@example.com</td>
+        </tr>
+        <tr>
+            <td contenteditable="true">Alice Brown</td>
+            <td contenteditable="true">22</td>
+            <td contenteditable="true">alice.brown@example.com</td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="save-button" onclick="saveTableData()">Save Changes</button>
+
+<script>
+    function saveTableData() {
+        let table = document.getElementById('editableTable');
+        let tableData = [];
+        
+        for (let row of table.rows) {
+            let rowData = [];
+            for (let cell of row.cells) {
+                if (cell.hasAttribute('contenteditable')) {
+                    rowData.push(cell.innerText);
+                }
+            }
+            if (rowData.length > 0) {
+                tableData.push(rowData);
+            }
+        }
+
+        console.log('Table Data:', tableData);
+
+        // Here you can send `tableData` to your server or process it as needed
+        alert('Table data saved! Check the console for details.');
+    }
+</script>
+
+</body>
+</html>
